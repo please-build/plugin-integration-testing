@@ -1,3 +1,24 @@
+def please_tool(name:str, version=CONFIG.E2E.PLEASE_VERSION, visibility:list):
+
+    version_dep = None
+    if version == "latest":
+        version_dep = tag(name, "version")
+        remote_file(
+            name = version_dep,
+            url = "https://get.please.build/latest_version",
+            visibility = ["PUBLIC"],
+        )
+        version = f"$(cat $(location :{version_dep}))"
+
+    genrule(
+        name = name,
+        cmd = f"export VERSION={version} && curl https://get.please.build/{CONFIG.OS}_{CONFIG.ARCH}/$VERSION/please_$VERSION --output $OUT",
+        outs = [name],
+        visibility = visibility,
+        deps = [f":{version_dep}"] if version_dep else None,
+        binary = True,
+    )
+
 # Runs e2e tests against please in a specified repo
 def please_repo_e2e_test(
         name: str,
@@ -34,10 +55,10 @@ def please_repo_e2e_test(
     test_cmd = ' && '.join(test_cmd)
 
     data["REPO"] = [repo]
-    data["BASE_CONFIG"] = ["//test/build_defs:base_config"]
+    data["BASE_CONFIG"] = [CONFIG.E2E.BASE_CONFIG]
 
-    tools["PLEASE"] = ["//package:installed_files|please"]
-    tools["CONTENT_CHECKER"] = ["//test/build_defs:content_checker"]
+    tools["PLEASE"] = [CONFIG.E2E.PLEASE_TOOL]
+    tools["CONTENT_CHECKER"] = [CONFIG.E2E.CONTENT_CHECKER]
 
     return gentest(
         name = name,
@@ -102,7 +123,7 @@ def plz_e2e_test(name:str, cmd:str, pre_cmd:str=None, expected_output:str=None,
         },
         data = data,
         deps = deps,
-        test_tools = ["//package:installed_files|please"],
+        test_tools = [CONFIG.E2E.PLEASE_TOOL],
         labels = ['e2e'] + (labels or []),
         no_test_output = True,
         sandbox = False,

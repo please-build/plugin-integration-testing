@@ -1,9 +1,18 @@
-; Please config file
-; Leaving this file as is is enough to use plz to build your project.
-; Please will stay on whatever version you currently have until you run
-; 'plz update', when it will download the latest available version.
-;
-; Or you can uncomment the following to pin everyone to a particular version;
-; when you change it all users will automatically get updated.
-; [please]
-; version = 16.22.0
+[PluginDefinition]
+Name = e2e
+
+[PluginConfig "please_tool"]
+DefaultValue = //tools:please
+Inherit = true
+
+[PluginConfig "please_version"]
+DefaultValue = latest
+Inherit = true
+
+[PluginConfig "base_config"]
+DefaultValue = //data:base_config
+
+[PluginConfig "content_checker"]
+DefaultValue = //tools:content_checker
+
+[Plugin "e2e"]

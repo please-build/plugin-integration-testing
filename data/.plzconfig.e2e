@@ -1,0 +1,3 @@
+; Set this so we don't pick up the test BUILD files in the main repo
+[parse]
+BuildFileName = BUILD_FILE
