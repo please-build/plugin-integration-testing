@@ -1,0 +1,18 @@
+[PluginDefinition]
+Name = e2e
+
+[PluginConfig "please_tool"]
+DefaultValue = //tools:please
+Inherit = true
+
+[PluginConfig "please_version"]
+DefaultValue = latest
+Inherit = true
+
+[PluginConfig "base_config"]
+DefaultValue = //data:base_config
+
+[PluginConfig "content_checker"]
+DefaultValue = //tools:content_checker
+
+[Plugin "e2e"]
