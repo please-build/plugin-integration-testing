@@ -16,9 +16,3 @@ DefaultValue = //data:base_config
 DefaultValue = //tools:content_checker
 
 [Plugin "e2e"]
-
-[parse]
-preloadsubincludes = ///shell//build_defs:shell
-
-[Plugin "shell"]
-Target = //plugins:shell
