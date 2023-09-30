@@ -5,9 +5,10 @@ please_tool(
     visibility = ["PUBLIC"],
 )
 
-sh_binary(
+filegroup(
     name = "content_checker",
-    main = "test_file_content.sh",
+    srcs = ["test_file_content.sh"],
+    binary = True,
     visibility = ["PUBLIC"],
 )
 
