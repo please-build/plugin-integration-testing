@@ -1,3 +1,9 @@
 ; Set this so we don't pick up the test BUILD files in the main repo
 [parse]
 BuildFileName = BUILD_FILE
+
+; Disable remote execution in the test repo - this can be enabled by default via a global Please
+; config file that is visible within the test sandbox, and will prevent Please from loading the
+; plugin under test from a file:// URL.
+[remote]
+url =
