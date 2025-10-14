@@ -1,3 +1,6 @@
+[Please]
+Version = >=17.19.1
+
 [PluginDefinition]
 Name = e2e
 
@@ -8,6 +11,11 @@ Inherit = true
 [PluginConfig "please_version"]
 DefaultValue = latest
 Inherit = true
+
+[PluginConfig "default_plugin"]
+ConfigKey = DefaultPlugin
+Optional = true
+Help = The default plugin to be tested by plugin_e2e_test. This is typically the name of an e2e_test_plugin target.
 
 [PluginConfig "base_config"]
 DefaultValue = //data:base_config
